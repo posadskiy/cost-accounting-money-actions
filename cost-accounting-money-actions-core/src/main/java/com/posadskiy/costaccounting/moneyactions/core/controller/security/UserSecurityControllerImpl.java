@@ -2,8 +2,8 @@ package com.posadskiy.costaccounting.moneyactions.core.controller.security;
 
 import com.posadskiy.restsecurity.controller.UserSecurityController;
 import com.posadskiy.restsecurity.exception.UserDoesNotExistException;
-import dev.posadskiy.costaccounting.db.UserRepository;
-import dev.posadskiy.costaccounting.db.model.DbUser;
+import com.posadskiy.costaccounting.moneyactions.core.db.UserRepository;
+import com.posadskiy.costaccounting.moneyactions.core.db.model.DbUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

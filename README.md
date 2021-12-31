@@ -1,2 +1,2 @@
-# cost-accounting-money-actions
-Money Actions module for Cost Accounting application
+# money-actions
+Authentication module 

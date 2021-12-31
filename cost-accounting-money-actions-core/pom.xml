@@ -80,6 +80,11 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.posadskiy</groupId>
+            <artifactId>rest-security</artifactId>
+            <version>0.0.2</version>
+        </dependency>
     </dependencies>
 
 </project>

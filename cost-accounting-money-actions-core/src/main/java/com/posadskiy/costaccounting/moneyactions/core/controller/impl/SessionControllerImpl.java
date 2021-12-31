@@ -1,8 +1,8 @@
 package com.posadskiy.costaccounting.moneyactions.core.controller.impl;
 
-import dev.posadskiy.costaccounting.controller.SessionController;
-import dev.posadskiy.costaccounting.db.SessionRepository;
-import dev.posadskiy.costaccounting.db.model.DbSession;
+import com.posadskiy.costaccounting.moneyactions.core.controller.SessionController;
+import com.posadskiy.costaccounting.moneyactions.core.db.SessionRepository;
+import com.posadskiy.costaccounting.moneyactions.core.db.model.DbSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
