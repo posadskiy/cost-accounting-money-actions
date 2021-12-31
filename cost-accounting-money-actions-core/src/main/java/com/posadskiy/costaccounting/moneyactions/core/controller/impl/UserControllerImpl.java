@@ -11,7 +11,6 @@ import com.posadskiy.costaccounting.moneyactions.core.exception.DeletingOldPurch
 import com.posadskiy.costaccounting.moneyactions.core.exception.UserDoesNotExistException;
 import com.posadskiy.costaccounting.moneyactions.core.exception.UserIsIncorrectException;
 import com.posadskiy.costaccounting.moneyactions.core.mapper.UserMapper;
-import com.posadskiy.costaccounting.moneyactions.core.util.Utils;
 import com.posadskiy.costaccounting.moneyactions.core.validation.UserValidation;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;

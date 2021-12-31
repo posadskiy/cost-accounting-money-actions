@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration("web-configuration")
-@ComponentScan({"com.posadskiy.costaccounting.moneyactions.core.controller","com.posadskiy.costaccounting.moneyactions.core.validation"})
+@ComponentScan({"com.posadskiy.costaccounting.moneyactions.core.controller","com.posadskiy.costaccounting.moneyactions.core.validation","com.posadskiy.costaccounting.moneyactions.core.mapper"})
 @Import({com.posadskiy.costaccounting.moneyactions.core.SpringConfiguration.class, MongoConfiguration.class})
 public class SpringConfiguration {
 	@Bean
