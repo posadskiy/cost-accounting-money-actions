@@ -1,16 +1,10 @@
 package com.posadskiy.costaccounting.moneyactions.api.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class Purchase {
-	private String id;
-	private String category;
-	private Double amount;
-	private String currency;
-	private String name;
-	private Date date;
-	private Boolean isPrivate;
-}
+public class Purchase extends MoneyAction {}
