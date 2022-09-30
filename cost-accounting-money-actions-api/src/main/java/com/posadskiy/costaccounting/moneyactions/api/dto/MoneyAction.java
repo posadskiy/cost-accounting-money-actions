@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class MoneyAction {
     private String id;
-    private String category;
+    private Category category;
     private Double amount;
     private String currency;
     private String name;
