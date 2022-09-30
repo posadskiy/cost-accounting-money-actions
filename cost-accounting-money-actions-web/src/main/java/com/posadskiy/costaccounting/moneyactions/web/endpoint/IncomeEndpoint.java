@@ -1,8 +1,8 @@
 package com.posadskiy.costaccounting.moneyactions.web.endpoint;
 
+import com.posadskiy.costaccounting.moneyactions.api.request.IncomeRequest;
 import com.posadskiy.costaccounting.moneyactions.core.controller.IncomeController;
 import com.posadskiy.costaccounting.moneyactions.api.dto.Category;
-import com.posadskiy.costaccounting.moneyactions.web.endpoint.request.IncomeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

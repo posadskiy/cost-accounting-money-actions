@@ -1,4 +1,4 @@
-package com.posadskiy.costaccounting.moneyactions.web.endpoint.request;
+package com.posadskiy.costaccounting.moneyactions.api.request;
 
 import lombok.Data;
 

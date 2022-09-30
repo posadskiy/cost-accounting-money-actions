@@ -1,8 +1,8 @@
 package com.posadskiy.costaccounting.moneyactions.web.endpoint;
 
+import com.posadskiy.costaccounting.moneyactions.api.request.PurchaseRequest;
 import com.posadskiy.costaccounting.moneyactions.core.controller.PurchaseController;
 import com.posadskiy.costaccounting.moneyactions.api.dto.Category;
-import com.posadskiy.costaccounting.moneyactions.web.endpoint.request.PurchaseRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.posadskiy.costaccounting.moneyactions.web.endpoint;
 
+import com.posadskiy.costaccounting.moneyactions.api.request.MoneyActionRequest;
 import com.posadskiy.costaccounting.moneyactions.core.controller.EventController;
 import com.posadskiy.costaccounting.moneyactions.core.db.model.MoneyAction;
-import com.posadskiy.costaccounting.moneyactions.web.endpoint.request.MoneyActionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
