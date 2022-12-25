@@ -10,5 +10,4 @@ import java.util.List;
 public interface PurchaseController {
 	void addPurchase(@NotNull final String userId, @NotNull final Purchase purchase);
 	void deletePurchase(@NotNull final String userId, @NotNull final String purchaseId);
-	List<Category> getCategories(final String userId);
 }

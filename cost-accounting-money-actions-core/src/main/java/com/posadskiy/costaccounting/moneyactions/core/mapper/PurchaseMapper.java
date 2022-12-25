@@ -8,7 +8,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring", uses = CategoryQualifier.class)
+@Mapper(componentModel = "spring")
 @Component
 public interface PurchaseMapper {
 
@@ -17,7 +17,6 @@ public interface PurchaseMapper {
 	@Mapping(target = "amount", ignore = true)
 	@Mapping(source = "date", target = "date")
 	@Mapping(source = "isPrivate", target = "isPrivate")
-	@Mapping(source = "category", target = "category", qualifiedByName = "qualifyCategoryIdToInstance") 
 	DbPurchase mapFromDto(Purchase purchase, @Context CurrencyConverter currencyConverter);
 
 	@Named("idToDbId")

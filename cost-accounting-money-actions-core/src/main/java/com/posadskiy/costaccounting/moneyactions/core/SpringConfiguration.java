@@ -24,11 +24,6 @@ public class SpringConfiguration {
     @Value("${openExchangeRates.apiKey}")
     private String openExchangeRatesApiKey;
 
-	@Bean
-	public CategoryMapper categoryMapper() {
-		return new CategoryMapperImpl();
-	}
-
     @Bean
 	public IncomeMapper incomeMapper() {
 		return new IncomeMapperImpl();
@@ -43,11 +38,6 @@ public class SpringConfiguration {
 	public UserMapper userMapper() {
 		return new UserMapperImpl();
 	}
-
-    @Bean
-    public CategoryQualifier categoryQualifier() {
-        return new CategoryQualifier();
-    }
 
     @Bean
     public CurrencyConverter currencyConverter() {

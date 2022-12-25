@@ -14,10 +14,8 @@ public interface UserMapper {
 	
 	@Mapping(target = "roles", ignore = true)
 	@Mapping(target = "purchases", ignore = true)
-	@Mapping(target = "purchaseCategories", ignore = true)
 	@Mapping(target = "projectId", ignore = true)
 	@Mapping(target = "incomes", ignore = true)
-	@Mapping(target = "incomeCategories", ignore = true)
 	@Mapping(target = "chatId", ignore = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "name", target = "name")
@@ -31,8 +29,6 @@ public interface UserMapper {
 	@Mapping(source = "email", target = "email")
 	@Mapping(source = "password", target = "password", ignore = true)
 	@Mapping(source = "defaultCurrency", target = "defaultCurrency")
-	@Mapping(source = "purchaseCategories", target = "purchaseCategories")
-	@Mapping(source = "incomeCategories", target = "incomeCategories")
 	User mapToDto(DbUser user);
 	
 	@Mapping(source = "id", target = "id")

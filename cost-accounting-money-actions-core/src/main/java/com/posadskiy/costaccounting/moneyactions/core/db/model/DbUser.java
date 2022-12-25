@@ -20,8 +20,6 @@ public class DbUser implements Serializable {
 	private Long chatId;
 	private String projectId;
 	private String defaultCurrency;
-	private List<DbCategory> purchaseCategories;
-	private List<DbCategory> incomeCategories;
 	private List<DbPurchase> purchases;
 	private List<DbIncome> incomes;
 	private List<String> roles;

@@ -24,15 +24,13 @@ public class PurchaseControllerImpl implements PurchaseController {
 	private final ProjectController projectController;
 	private final PurchaseMapper purchaseMapper;
 	private final CurrencyConverter currencyConverter;
-	private final CategoryController categoryController;
 	
 	@Autowired
-	public PurchaseControllerImpl(UserController userController, ProjectController projectController, PurchaseMapper purchaseMapper, CurrencyConverter currencyConverter, CategoryController categoryController) {
+	public PurchaseControllerImpl(UserController userController, ProjectController projectController, PurchaseMapper purchaseMapper, CurrencyConverter currencyConverter) {
 		this.userController = userController;
 		this.projectController = projectController;
 		this.purchaseMapper = purchaseMapper;
 		this.currencyConverter = currencyConverter;
-		this.categoryController = categoryController;
 	}
 
 	public void addPurchase(@NotNull final String userId, @NotNull final Purchase purchase) {
@@ -50,11 +48,6 @@ public class PurchaseControllerImpl implements PurchaseController {
 		userController.deletePurchase(foundUser.getId(), purchaseId);
 		final DbPurchase purchaseForDeleting = getPurchaseById(foundUser.getPurchases(), purchaseId);
 		projectController.deletePurchase(foundUser.getProjectId(), purchaseForDeleting);
-	}
-
-	@Override
-	public List<Category> getCategories(String userId) {
-		return categoryController.getPurchaseCategories();
 	}
 
 	private @NotNull DbPurchase getPurchaseById(@NotNull  List<DbPurchase> purchases, @NotNull String purchaseId) {

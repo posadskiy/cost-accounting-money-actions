@@ -23,15 +23,13 @@ public class IncomeControllerImpl implements IncomeController {
 	private final ProjectController projectController;
 	private final IncomeMapper incomeMapper;
 	private final CurrencyConverter currencyConverter;
-	private final CategoryController categoryController;
 
 	@Autowired
-	public IncomeControllerImpl(UserController userController, ProjectController projectController, IncomeMapper incomeMapper, CurrencyConverter currencyConverter, CategoryController categoryController) {
+	public IncomeControllerImpl(UserController userController, ProjectController projectController, IncomeMapper incomeMapper, CurrencyConverter currencyConverter) {
 		this.userController = userController;
 		this.projectController = projectController;
 		this.incomeMapper = incomeMapper;
 		this.currencyConverter = currencyConverter;
-		this.categoryController = categoryController;
 	}
 
 	private DbIncome getIncomeById(@NotNull List<DbIncome> incomes, @NotNull String incomeId) {
@@ -61,8 +59,4 @@ public class IncomeControllerImpl implements IncomeController {
 		projectController.deleteIncome(foundUser.getProjectId(), incomeForDeleting);
 	}
 
-	@Override
-	public List<Category> getCategories(@NotNull String userId) {
-		return categoryController.getIncomeCategories();
-	}
 }

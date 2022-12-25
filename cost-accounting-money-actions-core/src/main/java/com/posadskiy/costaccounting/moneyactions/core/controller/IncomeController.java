@@ -9,5 +9,4 @@ import java.util.List;
 public interface IncomeController {
 	void addIncome(@NotNull final String userId, @NotNull final Income income);
 	void deleteIncome(@NotNull final String userId, @NotNull final String incomeId);
-	List<Category> getCategories(@NotNull final String userId);
 }
