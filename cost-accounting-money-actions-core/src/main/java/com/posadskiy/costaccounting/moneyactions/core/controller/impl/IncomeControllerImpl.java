@@ -41,13 +41,27 @@ public class IncomeControllerImpl implements IncomeController {
 		return possibleIncomeForDeleting.get();
 	}
 
+    @Override
+    public Income getIncome(@NotNull String userId, @NotNull String incomeId) {
+        final Optional<DbIncome> income = userController.getIncome(userId, incomeId);
+        if (!income.isPresent()) {
+            throw new IncomeDoesNotExistOrTooOldException();
+        }
+
+        return incomeMapper.mapToDto(
+            income.get()
+        );
+    }
+
 	@Override
-	public void addIncome(@NotNull String userId, @NotNull Income income) {
+	public String addIncome(@NotNull String userId, @NotNull Income income) {
 		final DbUser foundUser = userController.getById(userId);
 		final DbIncome dbIncome = incomeMapper.mapFromDto(income, currencyConverter);
 
 		userController.saveIncome(foundUser.getId(), dbIncome);
 		projectController.saveIncome(foundUser.getProjectId(), dbIncome);
+        
+        return dbIncome.getId();
 	}
 
 	@Override

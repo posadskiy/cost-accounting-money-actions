@@ -4,7 +4,6 @@ import com.posadskiy.currencyconverter.CurrencyConverter;
 import com.posadskiy.costaccounting.moneyactions.core.controller.*;
 import com.posadskiy.costaccounting.moneyactions.core.db.model.DbPurchase;
 import com.posadskiy.costaccounting.moneyactions.core.db.model.DbUser;
-import com.posadskiy.costaccounting.moneyactions.api.dto.Category;
 import com.posadskiy.costaccounting.moneyactions.api.dto.Purchase;
 import com.posadskiy.costaccounting.moneyactions.core.exception.PurchaseDoesNotExistOrTooOldException;
 import com.posadskiy.costaccounting.moneyactions.core.mapper.PurchaseMapper;
@@ -33,12 +32,26 @@ public class PurchaseControllerImpl implements PurchaseController {
 		this.currencyConverter = currencyConverter;
 	}
 
-	public void addPurchase(@NotNull final String userId, @NotNull final Purchase purchase) {
+    @Override
+    public Purchase getPurchase(@NotNull String userId, @NotNull String purchaseId) {
+        final Optional<DbPurchase> purchase = userController.getPurchase(userId, purchaseId);
+        if (!purchase.isPresent()) {
+            throw new PurchaseDoesNotExistOrTooOldException();
+        }
+
+        return purchaseMapper.mapToDto(
+            purchase.get()
+        );
+    }
+
+	public String addPurchase(@NotNull final String userId, @NotNull final Purchase purchase) {
 		final DbUser foundUser = userController.getById(userId);
 		final DbPurchase dbPurchase = purchaseMapper.mapFromDto(purchase, currencyConverter);
 
 		userController.savePurchase(foundUser.getId(), dbPurchase);
 		projectController.savePurchase(foundUser.getProjectId(), dbPurchase);
+        
+        return dbPurchase.getId();
 	}
 
 	@Override

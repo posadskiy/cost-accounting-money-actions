@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("currency")
+@RequestMapping("v0/currency")
 public class CurrencyEndpoint {
 	
 	private final CurrencyController currencyController;

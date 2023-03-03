@@ -5,9 +5,7 @@ import com.posadskiy.costaccounting.moneyactions.core.db.UserRepository;
 import com.posadskiy.costaccounting.moneyactions.core.db.model.DbIncome;
 import com.posadskiy.costaccounting.moneyactions.core.db.model.DbPurchase;
 import com.posadskiy.costaccounting.moneyactions.core.db.model.DbUser;
-import com.posadskiy.costaccounting.moneyactions.core.exception.DeletingOldIncomeWithoutIdException;
-import com.posadskiy.costaccounting.moneyactions.core.exception.DeletingOldPurchaseWithoutIdException;
-import com.posadskiy.costaccounting.moneyactions.core.exception.UserDoesNotExistException;
+import com.posadskiy.costaccounting.moneyactions.core.exception.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +37,34 @@ public class UserControllerImpl implements UserController {
     @Override
     public DbUser save(@NotNull DbUser dbUser) {
         return userRepository.save(dbUser);
+    }
+    
+    @Override
+    public Optional<DbPurchase> getPurchase(String userId, String purchaseId) {
+        DbUser foundUser = getById(userId);
+
+        final List<DbPurchase> purchases = foundUser.getPurchases();
+        if (CollectionUtils.isEmpty(purchases)) {
+            throw new UserDoesNotHaveAnyPurchaseException();
+        }
+
+        return purchases.stream()
+            .filter(purchase -> purchaseId.equals(purchase.getId()))
+            .findFirst();
+    }
+
+    @Override
+    public Optional<DbIncome> getIncome(String userId, String incomeId) {
+        DbUser foundUser = getById(userId);
+
+        final List<DbIncome> incomes = foundUser.getIncomes();
+        if (CollectionUtils.isEmpty(incomes)) {
+            throw new UserDoesNotHaveAnyIncomeException();
+        }
+
+        return incomes.stream()
+            .filter(income -> incomeId.equals(income.getId()))
+            .findFirst();
     }
 
     @Override

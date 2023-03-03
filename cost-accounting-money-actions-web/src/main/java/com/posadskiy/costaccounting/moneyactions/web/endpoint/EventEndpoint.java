@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("events")
+@RequestMapping("v0/events")
 public class EventEndpoint {
     private final EventController eventController;
 
@@ -22,7 +22,7 @@ public class EventEndpoint {
         this.eventController = eventController;
     }
 
-    @PostMapping("month")
+    @PostMapping("monthly")
     public Map<Integer, List<MoneyAction>> lastMonthEvents(@RequestBody final MoneyActionRequest moneyActionRequest) {
         return eventController.monthEvents(moneyActionRequest.getUserId(), moneyActionRequest.getYear(), moneyActionRequest.getMonth());
     }

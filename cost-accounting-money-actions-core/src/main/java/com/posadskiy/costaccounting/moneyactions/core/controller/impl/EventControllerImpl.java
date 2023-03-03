@@ -2,10 +2,15 @@ package com.posadskiy.costaccounting.moneyactions.core.controller.impl;
 
 import com.posadskiy.costaccounting.moneyactions.core.controller.EventController;
 import com.posadskiy.costaccounting.moneyactions.core.controller.UserController;
+import com.posadskiy.costaccounting.moneyactions.core.db.model.DbIncome;
+import com.posadskiy.costaccounting.moneyactions.core.db.model.DbPurchase;
 import com.posadskiy.costaccounting.moneyactions.core.db.model.DbUser;
 import com.posadskiy.costaccounting.moneyactions.core.db.model.MoneyAction;
+import com.posadskiy.costaccounting.moneyactions.core.exception.UserDoesNotHaveAnyIncomeException;
+import com.posadskiy.costaccounting.moneyactions.core.exception.UserDoesNotHaveAnyPurchaseException;
 import com.posadskiy.costaccounting.moneyactions.core.util.Utils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,12 +38,23 @@ public class EventControllerImpl implements EventController {
 
         final LocalDateTime monthStart = LocalDateTime.of(year, month, 1, 0, 0);
         final LocalDateTime monthFinish = monthStart.plusMonths(1);
-        final List<MoneyAction> monthPurchases = foundUser.getPurchases().stream().filter(dbPurchase -> {
+        final List<DbPurchase> purchases = foundUser.getPurchases();
+        
+        if (CollectionUtils.isEmpty(purchases)) {
+            throw new UserDoesNotHaveAnyPurchaseException();
+        }
+
+        final List<MoneyAction> monthPurchases = purchases.stream().filter(dbPurchase -> {
             final LocalDateTime date = Utils.convertToLocalDateTimeViaInstant(dbPurchase.getDate());
             return date.isAfter(monthStart) && date.isBefore(monthFinish);
         }).collect(Collectors.toList());
 
-        final List<MoneyAction> monthIncomes = foundUser.getIncomes().stream().filter(dbIncome -> {
+        final List<DbIncome> incomes = foundUser.getIncomes();
+        if (CollectionUtils.isEmpty(incomes)) {
+            throw new UserDoesNotHaveAnyIncomeException();
+        }
+
+        final List<MoneyAction> monthIncomes = incomes.stream().filter(dbIncome -> {
             final LocalDateTime date = Utils.convertToLocalDateTimeViaInstant(dbIncome.getDate());
             return date.isAfter(monthStart) && date.isBefore(monthFinish);
         }).collect(Collectors.toList());
