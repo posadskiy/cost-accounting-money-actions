@@ -49,7 +49,7 @@ public class UserControllerImpl implements UserController {
         }
 
         return purchases.stream()
-            .filter(purchase -> purchaseId.equals(purchase.getId()))
+            .filter(purchase -> purchase != null &&purchase.getId() != null && purchaseId.equals(purchase.getId()))
             .findFirst();
     }
 
@@ -63,7 +63,7 @@ public class UserControllerImpl implements UserController {
         }
 
         return incomes.stream()
-            .filter(income -> incomeId.equals(income.getId()))
+            .filter(income -> income != null && income.getId() != null && incomeId.equals(income.getId()))
             .findFirst();
     }
 
@@ -92,11 +92,16 @@ public class UserControllerImpl implements UserController {
     public DbUser deletePurchase(String userId, String purchaseId) {
         DbUser foundUser = getById(userId);
 
-        final DbPurchase deletedPurchase = CollectionUtils.find(foundUser.getPurchases(), dbPurchase -> StringUtils.equals(dbPurchase.getId(), purchaseId));
-        if (deletedPurchase == null) throw new DeletingOldPurchaseWithoutIdException();
+        final Optional<DbPurchase> deletedPurchase = foundUser.getPurchases()
+            .stream()
+            .filter(purchase -> purchase != null && purchase.getId() != null && purchaseId.equals(purchase.getId()))
+            .findFirst();
 
-        final List<DbPurchase> purchasesWithoutDeleted = ListUtils.removeAll(foundUser.getPurchases(), Collections.singleton(deletedPurchase));
+        if (!deletedPurchase.isPresent()) {
+            throw new DeletingOldPurchaseWithoutIdException();
+        }
 
+        foundUser.getPurchases().remove(deletedPurchase.get());
 		/*categoryStatisticsController.decreaseMoneyActionToStatisticCategory(
 			foundUser.getStatistics()
 				.get(Utils.getMonthAndYear(deletedPurchase.getDate()))
@@ -104,17 +109,22 @@ public class UserControllerImpl implements UserController {
 				.get(deletedPurchase.getCategory().getId())
 			, deletedPurchase);*/
 
-        foundUser.setPurchases(purchasesWithoutDeleted);
         return this.save(foundUser);
     }
 
     public DbUser deleteIncome(String userId, String incomeId) {
         DbUser foundUser = getById(userId);
 
-        final DbIncome deletedIncome = CollectionUtils.find(foundUser.getIncomes(), dbIncome -> StringUtils.equals(dbIncome.getId(), incomeId));
-        if (deletedIncome == null) throw new DeletingOldIncomeWithoutIdException();
+        final Optional<DbIncome> deletedIncome = foundUser.getIncomes()
+            .stream()
+            .filter(income -> income != null && income.getId() != null && incomeId.equals(income.getId()))
+            .findFirst();
+        
+        if (!deletedIncome.isPresent()) {
+            throw new DeletingOldIncomeWithoutIdException();
+        }
 
-        final List<DbIncome> incomesWithoutDeleted = ListUtils.removeAll(foundUser.getIncomes(), Collections.singleton(deletedIncome));
+        foundUser.getIncomes().remove(deletedIncome.get());
 
 		/*categoryStatisticsController.decreaseMoneyActionToStatisticCategory(
 			foundUser.getStatistics()
@@ -123,7 +133,6 @@ public class UserControllerImpl implements UserController {
 				.get(deletedIncome.getCategory().getId())
 			, deletedIncome);*/
 
-        foundUser.setIncomes(incomesWithoutDeleted);
         return this.save(foundUser);
     }
 }

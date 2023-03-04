@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 public class PurchaseRequest {
 	private String userId;
+
+    // TODO: remove
 	private String purchaseId;
 	private Purchase purchase;
 }

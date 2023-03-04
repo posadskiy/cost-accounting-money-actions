@@ -21,7 +21,7 @@ public class PurchaseEndpoint {
     }
 
 	@PostMapping("add")
-	public String addPurchase(@RequestBody final PurchaseRequest purchaseRequest) {
+	public Purchase addPurchase(@RequestBody final PurchaseRequest purchaseRequest) {
 		return purchaseController.addPurchase(purchaseRequest.getUserId(), purchaseRequest.getPurchase());
 	}
 	

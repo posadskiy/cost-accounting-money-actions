@@ -54,14 +54,16 @@ public class IncomeControllerImpl implements IncomeController {
     }
 
 	@Override
-	public String addIncome(@NotNull String userId, @NotNull Income income) {
+	public Income addIncome(@NotNull String userId, @NotNull Income income) {
 		final DbUser foundUser = userController.getById(userId);
 		final DbIncome dbIncome = incomeMapper.mapFromDto(income, currencyConverter);
 
 		userController.saveIncome(foundUser.getId(), dbIncome);
 		projectController.saveIncome(foundUser.getProjectId(), dbIncome);
         
-        return dbIncome.getId();
+        return incomeMapper.mapToDto(
+            dbIncome
+        );
 	}
 
 	@Override

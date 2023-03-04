@@ -23,7 +23,7 @@ public class IncomeEndpoint {
 	}
 
 	@PostMapping("add")
-	public String addIncome(@RequestBody final IncomeRequest incomeRequest) {
+	public Income addIncome(@RequestBody final IncomeRequest incomeRequest) {
 		return incomeController.addIncome(incomeRequest.getUserId(), incomeRequest.getIncome());
 	}
 

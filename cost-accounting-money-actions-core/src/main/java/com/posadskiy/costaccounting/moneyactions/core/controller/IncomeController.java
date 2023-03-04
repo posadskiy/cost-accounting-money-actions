@@ -5,6 +5,6 @@ import org.jetbrains.annotations.NotNull;
 
 public interface IncomeController {
 	Income getIncome(@NotNull final String userId, @NotNull final String incomeId);
-	String addIncome(@NotNull final String userId, @NotNull final Income income);
+	Income addIncome(@NotNull final String userId, @NotNull final Income income);
 	void deleteIncome(@NotNull final String userId, @NotNull final String incomeId);
 }

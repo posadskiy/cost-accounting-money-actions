@@ -6,6 +6,6 @@ import org.jetbrains.annotations.NotNull;
 public interface PurchaseController {
     Purchase getPurchase(@NotNull final String userId, @NotNull final String purchaseId);
 
-    String addPurchase(@NotNull final String userId, @NotNull final Purchase purchase);
+    Purchase addPurchase(@NotNull final String userId, @NotNull final Purchase purchase);
 	void deletePurchase(@NotNull final String userId, @NotNull final String purchaseId);
 }

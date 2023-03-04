@@ -44,14 +44,16 @@ public class PurchaseControllerImpl implements PurchaseController {
         );
     }
 
-	public String addPurchase(@NotNull final String userId, @NotNull final Purchase purchase) {
+	public Purchase addPurchase(@NotNull final String userId, @NotNull final Purchase purchase) {
 		final DbUser foundUser = userController.getById(userId);
 		final DbPurchase dbPurchase = purchaseMapper.mapFromDto(purchase, currencyConverter);
 
 		userController.savePurchase(foundUser.getId(), dbPurchase);
 		projectController.savePurchase(foundUser.getProjectId(), dbPurchase);
         
-        return dbPurchase.getId();
+        return purchaseMapper.mapToDto(
+            dbPurchase
+        );
 	}
 
 	@Override
